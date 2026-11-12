@@ -1,14 +1,18 @@
 
 #include <iostream>
+#include <string>
 #include <limits>
 
 int main() {
     char command;
-    int pwmValue = 128;  // Default PWM value (0-255)
+    int pwmValue = 128;
+
+    // Simulated vehicle state
+    std::string movementState = "Stopped";
 
     std::cout << "====================================\n";
     std::cout << "   ESP32 RC INSPECTION VEHICLE\n";
-    std::cout << "   Movement & PWM Control Simulation\n";
+    std::cout << "   Vehicle Control Simulation\n";
     std::cout << "====================================\n";
 
     while (true) {
@@ -19,8 +23,9 @@ int main() {
         std::cout << "D - Turn Right\n";
         std::cout << "X - Stop Vehicle\n";
         std::cout << "P - Set PWM Speed\n";
-        std::cout << "V - View Current Speed\n";
-        std::cout << "Q - Quit Simulation\n";
+        std::cout << "V - View PWM Speed\n";
+        std::cout << "T - View Vehicle Status\n";
+        std::cout << "Q - Quit\n";
         std::cout << "Enter command: ";
 
         if (!(std::cin >> command)) {
@@ -33,33 +38,37 @@ int main() {
         }
 
         switch (command) {
-
             case 'W':
             case 'w':
+                movementState = "Forward";
                 std::cout << "Moving Forward | PWM: "
                           << pwmValue << "/255\n";
                 break;
 
             case 'S':
             case 's':
+                movementState = "Backward";
                 std::cout << "Moving Backward | PWM: "
                           << pwmValue << "/255\n";
                 break;
 
             case 'A':
             case 'a':
+                movementState = "Left";
                 std::cout << "Turning Left | PWM: "
                           << pwmValue << "/255\n";
                 break;
 
             case 'D':
             case 'd':
+                movementState = "Right";
                 std::cout << "Turning Right | PWM: "
                           << pwmValue << "/255\n";
                 break;
 
             case 'X':
             case 'x':
+                movementState = "Stopped";
                 std::cout << "Vehicle Stopped\n";
                 break;
 
@@ -81,7 +90,6 @@ int main() {
 
                 if (newPWM >= 0 && newPWM <= 255) {
                     pwmValue = newPWM;
-
                     std::cout << "PWM speed updated: "
                               << pwmValue << "/255\n";
                 } else {
@@ -95,10 +103,23 @@ int main() {
             case 'v':
                 std::cout << "Current PWM value: "
                           << pwmValue << "/255\n";
-
                 std::cout << "PWM Duty Cycle: "
                           << (pwmValue * 100.0 / 255.0)
                           << "%\n";
+                break;
+
+            case 'T':
+            case 't':
+                std::cout << "\n--- VEHICLE STATUS ---\n";
+                std::cout << "Direction: "
+                          << movementState << "\n";
+                std::cout << "PWM Setting: "
+                          << pwmValue << "/255\n";
+                std::cout << "Duty Cycle: "
+                          << (pwmValue * 100.0 / 255.0)
+                          << "%\n";
+                std::cout << "Mode: Simulation\n";
+                std::cout << "----------------------\n";
                 break;
 
             default:
