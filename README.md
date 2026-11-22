@@ -85,24 +85,6 @@ The repository currently focuses on developing modular C++ components and vehicl
 
 Individual modules are being developed before full integration into the main application and physical hardware.
 
-### Development Roadmap
-
-- [x] Initial vehicle control simulation
-- [x] Modular software components
-- [x] Distance filtering module
-- [x] Obstacle alert module
-- [x] Communication watchdog module
-- [x] Motor monitoring and speed control modules
-- [x] Wi-Fi monitoring module
-- [x] Sensor failure protection module
-- [ ] Integrate modules into `main.cpp`
-- [ ] Implement ESP32 hardware control
-- [ ] Establish Wi-Fi command and telemetry communication
-- [ ] Develop the C++ desktop control interface
-- [ ] Integrate HC-SR04 distance sensor
-- [ ] Add DHT11, LDR, and SW-420 sensors
-- [ ] Test the complete inspection vehicle
-
 ## Project Objectives
 
 This project aims to develop practical experience in:
